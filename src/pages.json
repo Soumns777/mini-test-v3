@@ -1,0 +1,90 @@
+{
+  "easycom": {
+    "autoscan": true,
+    // 注意一定要放在custom里，否则无效，https://ask.dcloud.net.cn/question/131175
+    "custom": {
+      "^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
+      "^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
+      "^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue",
+      "^s-up-(.*)": "@/components/s-$1/index.vue",
+      "^s1-up-(.*)": "@/subpkg/components/s1-$1/index.vue"
+    }
+  },
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/home/index",
+      "style": {
+        "navigationBarTitleText": "首页"
+      }
+    },
+    {
+      "path": "pages/cart/index",
+      "style": {
+        "navigationBarTitleText": "方案"
+      }
+    },
+    {
+      "path": "pages/my/index",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    }
+  ],
+  // 分包配置 root相当于 pages
+  "subPackages": [
+    {
+      "root": "subpkg",
+      "pages": [
+        {
+          "path": "test/index",
+          "style": {
+            "navigationBarTitleText": "测试"
+          }
+        }
+      ]
+    }
+  ],
+  // 分包预加载配置
+  "preloadRule": {
+    "subpkg/test/index": {
+      "network": "all",
+      "packages": [
+        "subpkg"
+      ]
+    }
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  // tabBar区域
+  "tabBar": {
+    "color": "#C9C9C9",
+    "selectedColor": "#4c7ef6",
+    "backgroundColor": "#F9FAFC",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "static/tab-icons/home.png",
+        "selectedIconPath": "static/tab-icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/cart/index",
+        "text": "方案",
+        "iconPath": "static/tab-icons/cate.png",
+        "selectedIconPath": "static/tab-icons/cate-active.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的",
+        "iconPath": "static/tab-icons/my.png",
+        "selectedIconPath": "static/tab-icons/my-active.png"
+      }
+    ]
+  }
+}
