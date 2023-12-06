@@ -75,7 +75,6 @@ onBeforeMount(() => {
 
 defineExpose({
   handleVerifyForm,
-  handleDefaultColumnIdx
 })
 
 const emits = defineEmits()
@@ -89,7 +88,7 @@ emits('update:handleVerify', handleVerifyForm)
     <view v-for="(item,idx) in cellData" :key="idx">
       <u-form-item :labelWidth="item.labelWidth || 80" :label="item.label"
                    :prop="item.prop"
-                   required @click="handleSelect(item)">
+                   required>
         <u--input
             v-model="formData[item.prop]"
             :placeholder="item.placeholder"
