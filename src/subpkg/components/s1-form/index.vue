@@ -77,10 +77,19 @@ defineExpose({
 const actionSheetRef = ref()
 const pickerRef = ref()
 const handleSelect = (selectType, prop, actions) => {
-  if (selectType == INPUT_SELECT_TYPE.NORMAL) {
-    actionSheetRef.value.handleSelectAction(prop, actions)
-  } else {
-    pickerRef.value.handleSelectPicker(prop, actions)
+  switch (selectType) {
+    case INPUT_SELECT_TYPE.NORMAL: {
+      actionSheetRef.value.handleSelectAction(prop, actions)
+      break;
+    }
+    case INPUT_SELECT_TYPE.ADDRESS: {
+      pickerRef.value.handleSelectPicker(prop, actions)
+      break;
+    }
+    default: {
+      actionSheetRef.value.handleSelectAction(prop, actions)
+      break;
+    }
   }
 }
 

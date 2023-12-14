@@ -15,7 +15,7 @@ const dynamicDefaultIdx = ref([0, 0, 0])
  * @desc select picker
  */
 const handleSelectPicker = (prop, actions) => {
-  console.log("💙💛select picker", prop, actions)
+  console.log("💙💛select picker", actions)
   pickerData.value = actions
   showPicker.value = !showPicker.value
 }

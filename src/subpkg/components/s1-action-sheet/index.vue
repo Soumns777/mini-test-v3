@@ -33,7 +33,7 @@ const showAction = ref(false)
 const actionType = ref()
 const actionData = ref([])
 const handleSelectAction = (prop, actions) => {
-  console.log("💙💛select action sheet", prop, actions)
+  console.log("💙💛select action sheet", actions)
   showAction.value = !showAction.value
   actionData.value = actions
   actionType.value = prop
