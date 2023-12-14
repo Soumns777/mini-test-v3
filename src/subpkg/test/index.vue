@@ -1,89 +1,129 @@
 <script setup>
+import {toast} from '@/services/promiseApi.js'
+import {FORM_RULE_TYPE, INPUT_SELECT_TYPE} from "@/libs/constant.js";
+
 const addressFormData = ref({
   userName: '',
   idCard: '',
-  phone: ''
+  phone: '',
+  address: ''
 })
 // 表单渲染到页面的数据
 const shippingAddress = ref([
   {
     label: '姓名',
-    value: '',
-    placeholder: '请输入姓名',
-    prop: 'userName'
+    prop: FORM_RULE_TYPE.USER_NAME,
   },
   {
     label: '身份证',
-    value: '',
-    placeholder: '请输入身份证',
-    prop: 'idCard',
-    type: 'idCard',
+    prop: FORM_RULE_TYPE.ID_CARD,
   },
   {
     label: '手机号码',
-    value: '',
-    placeholder: '请输入手机号码',
-    prop: 'phone',
-    type: 'number',
-    isShowLine: false
+    prop: FORM_RULE_TYPE.PHONE,
+  },
+  {
+    label: '地址',
+    prop: FORM_RULE_TYPE.ADDRESS,
+    suffixIcon: 'arrow-right',
+    selectType: INPUT_SELECT_TYPE.NORMAL,
+    actions: [
+      {
+        name: '江苏'
+      },
+      {
+        name: '安徽'
+      },
+    ]
+  },
+  {
+    label: '省市区',
+    prop: FORM_RULE_TYPE.ADDRESS,
+    suffixIcon: 'arrow-right',
+    selectType: INPUT_SELECT_TYPE.ADDRESS,
+    actions: [[
+      {
+        name: '江苏',
+      },
+      {
+        name: '安徽'
+      }
+    ],
+      [
+        {
+          name: '江苏',
+        },
+        {
+          name: '安徽'
+        }
+      ],
+      [
+        {
+          name: '江苏',
+        },
+        {
+          name: '安徽'
+        }
+      ],]
   },
 ])
-// 表单校验项
-const shippingAddressRules = reactive({
-  userName: [
-    {
-      required: true,
-      message: '请输入姓名',
-      trigger: ['blur', 'change'],
-    },
-    {
-      validator: (rule, value, callback) => {
-        return uni.$u.test.chinese(value);
-      },
-      message: '姓名格式不正确',
-      trigger: ['blur', 'change']
-    },
-  ],
-  idCard: [
-    {
-      required: true,
-      message: '请输入身份证',
-      trigger: ['blur', 'change'],
-    },
-    {
-      validator: (rule, value, callback) => {
-        return uni.$u.test.idCard(value);
-      },
-      message: '身份证格式不正确',
-      trigger: ['blur', 'change']
-    },
-  ],
-  phone: [
-    {
-      required: true,
-      message: '请输入手机号码',
-      trigger: ['blur', 'change'],
-    },
-    {
-      validator: (rule, value, callback) => {
-        return uni.$u.test.mobile(value);
-      },
-      message: '手机号码格式不正确',
-      trigger: ['blur', 'change']
-    },
-  ],
-})
+
+
+// 多表单
+const duoweiFormData = ref([
+  {
+    formData: JSON.parse(JSON.stringify(addressFormData.value)),
+    cellData: JSON.parse(JSON.stringify(shippingAddress.value)),
+  },
+  // {
+  //   formData: JSON.parse(JSON.stringify(addressFormData.value)),
+  //   cellData: JSON.parse(JSON.stringify(shippingAddress.value)),
+  // },
+])
+
+
+/**
+ * @desc  提交
+ */
+const handleSubmit = async () => {
+  try {
+    for (let idx = 0; idx < duoweiFormData.value.length; idx++) {
+      let current = duoweiFormData.value[idx]
+
+      await refs[idx + 1].handleSubmit()
+
+      if (idx >= duoweiFormData.value.length - 1) {
+        toast('提交成功!', 2000, 'success')
+        console.log("💙💛提交成功", duoweiFormData.value.map(item => item.formData))
+      }
+    }
+  } catch (e) {
+    toast(e, 2000)
+  }
+}
+
+/**
+ * @desc 初始化子组件ref
+ */
+const refs = reactive({})
+const handleGetRef = (item, idx) => {
+  return (el) => {
+    refs[idx + 1] = toRefs(el)
+  }
+}
 
 
 </script>
 
 <template>
-  <view class="container bg-[#f6f6f6]" min-w-h>
-
-    <view mt-30 px-30rpx rd-sm bg-base w-696 h-400 ml-28 pt-30 pb-20>
-      <s1-up-form v-model:formData="addressFormData" v-model:cellData="shippingAddress"
-                  v-model:formRules="shippingAddressRules" inputAlign="left" ref="addressFormRef"
+  <view class="container bg-[#f6f6f6]" min-w-h pt-40>
+    <view mb-30 v-for="(item,idx) in duoweiFormData" :key="idx" px-30>
+      <s1-form v-model:formData="item.formData" v-model:cellData="item.cellData"
+               :ref="handleGetRef(item, idx)"
       />
     </view>
+
+
+    <button mt-100 @click="handleSubmit" s-btn-blue>Submit</button>
   </view>
 </template>

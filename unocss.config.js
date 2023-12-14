@@ -49,8 +49,7 @@ export default {
             'order-qd': '44rpx' // 确定订单
         },
         lineHeight: {
-            address: '29rpx',
-            number: '5rpx'
+            custom: '40rpx',
         },
     },
     rules: [
@@ -83,6 +82,12 @@ export default {
         }],
     ],
     shortcuts: [
+        // 动态颜色
+        [
+            /^s-btn-(.*)$/,
+            ([, c]) =>
+                `bg-${c}-400 text-${c}-100  py-2 px-4  font-semibold rounded-lg shadow-md  border-none  cursor-pointer text-center`,
+        ],
         // position
         ['pr', 'relative'],
         ['pa', 'absolute'],

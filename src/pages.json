@@ -7,7 +7,7 @@
       "^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
       "^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue",
       "^s-up-(.*)": "@/components/s-$1/index.vue",
-      "^s1-up-(.*)": "@/subpkg/components/s1-$1/index.vue"
+      "^s1-(.*)": "@/subpkg/components/s1-$1/index.vue"
     }
   },
   "pages": [

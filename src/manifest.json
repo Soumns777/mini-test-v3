@@ -1,6 +1,6 @@
 {
   "name": "Minitest-Vue3",
-  "appid": "",
+  "appid": "wxc54fd7d8d379da04",
   "description": "",
   "versionName": "1.0.0",
   "versionCode": "100",
@@ -50,7 +50,7 @@
   "quickapp": {},
   /* 小程序特有相关 */
   "mp-weixin": {
-    "appid": "",
+    "appid": "wxc54fd7d8d379da04",
     "setting": {
       "urlCheck": false,
       "es6": true,

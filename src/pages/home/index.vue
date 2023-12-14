@@ -97,12 +97,6 @@ duoweiFormData.value = [
   },
 ]
 
-onReady(() => {
-  // duoweiFormData.value.map(item => {
-  //   item.handleRules()
-  // })
-})
-
 
 /**
  * @desc 校验
@@ -110,7 +104,6 @@ onReady(() => {
 
 const handleSubmit = async () => {
   try {
-    // await addressFormRef.value.handleVerifyForm()
     for (let idx = 0; idx <= duoweiFormData.value.length; idx++) {
       const current = duoweiFormData.value[idx]
       await current.handleVerify()
@@ -129,14 +122,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <view class="container bg-[#f6f6f6]" min-w-h>
-    <view px-30rpx rd-sm bg-base w-696 ml-28 mb-20>
-      <s-up-form v-model:formData="addressFormData" v-model:cellData="shippingAddress"
-                 v-model:formRules="shippingAddressRules" inputAlign="left"
-      />
-    </view>
-
-
+  <view class="container bg-[#f6f6f6]" min-ww-h>
     <view px-30rpx rd-sm bg-base w-696 ml-28 v-for="(item,idx) in duoweiFormData" :key="idx" mb-20>
       <s-up-form v-model:formData="item.formData" v-model:cellData="item.cellData"
                  v-model:formRules="item.rules" v-model:handleVerify="item.handleVerify" inputAlign="left"
