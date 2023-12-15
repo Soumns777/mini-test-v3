@@ -14,7 +14,7 @@ const emits = defineEmits()
 const props = defineProps({
   inpVal: {
     type: [String, Number],
-    required: true,
+    required: false,
   },
   defineConfig: {
     type: Object,
@@ -42,6 +42,7 @@ const {
   inputAlign,
   labelWidth
 } = toRefs(props)
+
 
 /**
  * @desc dyniamic-input-align

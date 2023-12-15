@@ -1,6 +1,7 @@
 <script setup>
 import {toast} from '@/services/promiseApi.js'
-import {FORM_RULE_TYPE, INPUT_SELECT_TYPE} from "@/libs/constant.js";
+import {FORM_RULE_TYPE, INPUT_SELECT_TYPE, HTTP_RESULT} from "@/libs/constant.js";
+
 
 const addressFormData = ref({
   userName: '',
@@ -38,33 +39,10 @@ const shippingAddress = ref([
   },
   {
     label: '省市区',
-    prop: FORM_RULE_TYPE.ADDRESS,
+    prop: FORM_RULE_TYPE.PROVINCE_CITY_DISTRICT,
     suffixIcon: 'arrow-right',
     selectType: INPUT_SELECT_TYPE.ADDRESS,
-    actions: [[
-      {
-        name: '江苏',
-      },
-      {
-        name: '安徽'
-      }
-    ],
-      [
-        {
-          name: '江苏',
-        },
-        {
-          name: '安徽'
-        }
-      ],
-      [
-        {
-          name: '江苏',
-        },
-        {
-          name: '安徽'
-        }
-      ],]
+    actions: []
   },
 ])
 
@@ -112,7 +90,6 @@ const handleGetRef = (item, idx) => {
   }
 }
 
-
 </script>
 
 <template>
@@ -124,6 +101,9 @@ const handleGetRef = (item, idx) => {
     </view>
 
 
-    <button mt-100 @click="handleSubmit" s-btn-blue>Submit</button>
+    <view f-c-c>
+      <button w-600 h-100 mt-100 @click="handleSubmit" s-btn-blue>Submit</button>
+    </view>
+
   </view>
 </template>

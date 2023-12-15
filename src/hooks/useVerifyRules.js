@@ -55,6 +55,14 @@ export const useVerify = (prop) => {
                 },
             ]
         }
+        case FORM_RULE_TYPE.PROVINCE_CITY_DISTRICT: {
+            return [
+                {
+                    required: true,
+                    message: '请选择省市区',
+                },
+            ]
+        }
         default: {
             break;
         }

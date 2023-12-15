@@ -2,6 +2,10 @@
  * @desc 静态变量
  */
 
+// http request code
+export const HTTP_RESULT = {
+    SUCCESS: '200'
+}
 
 // input-form-rules
 export const FORM_RULE_TYPE = {
@@ -9,6 +13,7 @@ export const FORM_RULE_TYPE = {
     ID_CARD: 'idCard', // 身份证
     PHONE: 'phone', // 手机号
     ADDRESS: 'address', // 地址
+    PROVINCE_CITY_DISTRICT: 'provinceCityDisrict', // 省市区
 }
 
 // input-align-type
