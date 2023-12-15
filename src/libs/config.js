@@ -6,7 +6,7 @@
 let BASE_URL;
 
 if (process.env.NODE_ENV === 'development') {
-    BASE_URL = 'https://3924091x38.imdo.co/zhibei/public/api'
+    BASE_URL = ''
 } else {
     BASE_URL = ''
 }

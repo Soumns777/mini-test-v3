@@ -1,0 +1,37 @@
+/* 自定义input输入框的下边距 */
+:deep(.u-form-item__body) {
+}
+
+/* 自定义form-item每一项的margin-bottom */
+:deep(.u-form-item) {
+  margin-bottom: 29rpx !important;
+}
+
+/* 自定义报错提示的文字的margin-left */
+:deep(.u-form-item__body__right__message) {
+  margin-left: 200rpx !important;
+}
+
+/* 自定义form-item每一项的margin-left */
+:deep(.u-form-item__body__left) {
+  margin-left: 20rpx !important;
+}
+
+/* 自定义input到左边label的margin-left */
+:deep(.u-form-item__body__right) {
+  margin-left: 30rpx !important;
+}
+
+/* 自定义右侧图标的margin-right */
+:deep(.item__body__right__content__icon) {
+  margin-right: 20rpx !important;
+}
+
+
+:deep(.u-form-item__body__right__content) {
+}
+
+
+
+
+

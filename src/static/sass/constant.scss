@@ -1,0 +1,20 @@
+view, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dan-hang {
+  overflow: hidden; //超出的隐藏
+  text-overflow: ellipsis; //省略号
+  white-space: nowrap; //强制一行显示
+}
+
+.two-hang {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  /*! autoprefixer: off */
+}
