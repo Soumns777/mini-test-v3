@@ -63,6 +63,14 @@ export const useVerify = (prop) => {
                 },
             ]
         }
+        case FORM_RULE_TYPE.VERIFY_CODE: {
+            return [
+                {
+                    required: true,
+                    message: '请输入验证码',
+                },
+            ]
+        }
         default: {
             break;
         }
@@ -82,6 +90,9 @@ export const autoType = (prop) => {
             return 'idcard'
         }
         case FORM_RULE_TYPE.PHONE: {
+            return 'number'
+        }
+        case FORM_RULE_TYPE.VERIFY_CODE: {
             return 'number'
         }
         default: {

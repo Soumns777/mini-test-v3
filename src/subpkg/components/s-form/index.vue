@@ -42,13 +42,28 @@ const handleGetRef = (item, idx) => {
   }
 }
 
-// dynamic inpVal
-const dynamicInpVal = computed(()=>{
-  return (formItem)=>{
-    if(formItem.selectType) {
+/**
+ * @desc dynamic inpVal
+ */
+const dynamicInpVal = computed(() => {
+  return (formItem) => {
+    if (formItem.selectType) {
       return formData.value[formItem.prop].name
-    }else {
+    } else {
       return formData.value[formItem.prop]
+    }
+  }
+})
+
+/**
+ * @desc dynamic suffix icon
+ */
+const dynamicSuffixIcon = computed(() => {
+  return (formItem) => {
+    if (formItem.suffixIcon) {
+      return formItem.suffixIcon
+    } else {
+      return 'arrow-right'
     }
   }
 })
@@ -57,10 +72,14 @@ const dynamicInpVal = computed(()=>{
  * @desc 初始化省市区所有数据
  */
 let addressList = ref([])
-
+/**
+ * @desc update province city district
+ */
+const handleUpdateAddress = (provinceCityDistrict) => {
+  addressList.value = provinceCityDistrict
+}
 onLoad(async () => {
   addressList.value = await useProvinceCityDistrict()
-  console.log("💙💛 init province city district",addressList.value)
 })
 
 /**
@@ -83,13 +102,6 @@ const handleSelect = (selectType, prop, actions) => {
       break;
     }
   }
-}
-
-/**
- * @desc update province city district
- */
-const handleUpdateAddress =  (provinceCityDistrict) => {
-  addressList.value = provinceCityDistrict
 }
 
 
@@ -138,9 +150,14 @@ defineExpose({
                   :labelWidth="labelWidth"
                   :key="idx">
 
-      <template #suffix pr v-if="item.suffixIcon">
+      <template #suffix pr v-if="item.selectType">
         <view pa right-0 top--20 w-500 h-70 op-0 z-2 @click="handleSelect(item.selectType,item.prop,item.actions)"/>
-        <u-icon :name="item.suffixIcon" size="17" color="#B4B4B5"/>
+        <u-icon :name="dynamicSuffixIcon(item)" size="17" color="#B4B4B5"/>
+
+        <u-code start-text="发送验证码" change-text="Xs" :seconds="item.countDown"
+                ref="uCode"
+                @change="handleCodeChange" keepRunning @start="handleCountDown" @end="handleCountDown" unique-key="">>
+        </u-code>
       </template>
     </s1-form-item>
   </view>
@@ -150,5 +167,6 @@ defineExpose({
                    ref="actionSheetRef"/>
 
   <!-- picker(选择省市区) -->
-  <s1-picker  v-model:handleValidate="handleValidate" v-model:formData="formData" v-model:cellData="cellData" v-model:addressList="addressList" ref="pickerRef"/>
+  <s1-picker v-model:handleValidate="handleValidate" v-model:formData="formData" v-model:cellData="cellData"
+             v-model:addressList="addressList" ref="pickerRef"/>
 </template>

@@ -13,14 +13,14 @@ import {INPUT_ALIGN_TYPE} from "@/libs/constant.js";
 const emits = defineEmits()
 const props = defineProps({
   inpVal: {
-    type: [String, Number,Array],
+    type: [String, Number, Array],
     required: false,
   },
   defineConfig: {
     type: Object,
     required: true,
   },
-  formData:{
+  formData: {
     type: Object,
     required: true,
   },
@@ -31,7 +31,7 @@ const props = defineProps({
   inputAlign: {
     type: String,
     required: false,
-    default: 'left'
+    default: 'right'
   },
   labelWidth: {
     type: [Number, String],

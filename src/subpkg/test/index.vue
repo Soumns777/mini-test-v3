@@ -8,15 +8,16 @@ const addressFormData = ref({
   idCard: '',
   phone: '',
   address: {}, // 选择基础地址
-  provinceCityDisrict:{}, // 选择省市区
+  provinceCityDisrict: {}, // 选择省市区
+  verifyCode: '', // 验证码
+
 })
 // 表单渲染到页面的数据
 const shippingAddress = ref([
   // {
   //   label: '姓名',
-  //   prop:'userName',
+  //   prop: 'userName',
   //   ruleType: FORM_RULE_TYPE.USER_NAME,
-  //
   // },
   // {
   //   label: '身份证',
@@ -49,10 +50,17 @@ const shippingAddress = ref([
     label: '省市区',
     prop: 'provinceCityDisrict',
     ruleType: FORM_RULE_TYPE.PROVINCE_CITY_DISTRICT,
-    suffixIcon: 'arrow-right',
     selectType: INPUT_SELECT_TYPE.ADDRESS,
-    actions: []
   },
+
+  {
+    label: '验证码',
+    prop: 'verifyCode',
+    countDown:60,
+    uniqueKey:'test',
+    ruleType: FORM_RULE_TYPE.VERIFY_CODE,
+  },
+
 ])
 
 

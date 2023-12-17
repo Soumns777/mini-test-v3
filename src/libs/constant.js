@@ -14,6 +14,7 @@ export const FORM_RULE_TYPE = {
     PHONE: 'phone', // 手机号
     ADDRESS: 'address', // 地址
     PROVINCE_CITY_DISTRICT: 'provinceCityDisrict', // 省市区
+    VERIFY_CODE: 'verifyCode', // 验证码
 }
 
 // input-align-type

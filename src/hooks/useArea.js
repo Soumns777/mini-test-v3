@@ -6,7 +6,8 @@ import {HTTP_RESULT} from "@/libs/constant.js";
 
 /**
  * @desc 根据层级和区域code初始化某一层级数据
- * @param level 级别，默认1,1代表省，2代表市，3代表区县
+ * @param level 级别，默认1,1代表省，2代表
+ * 市，3代表区县
  * @param pid 父级地区的code，比如取合肥市的区县，此参数的值是340100，即合肥市的code
  */
 const useArea = (level, pid) => {
