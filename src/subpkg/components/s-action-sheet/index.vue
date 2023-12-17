@@ -33,13 +33,13 @@ const showAction = ref(false)
 const actionType = ref()
 const actionData = ref([])
 const handleSelectAction = (prop, actions) => {
-  console.log("💙💛select action sheet", actions)
   showAction.value = !showAction.value
   actionData.value = actions
   actionType.value = prop
 }
 const handleConfirmAction = async (e) => {
-  formData.value[actionType.value] = e.name
+  formData.value[actionType.value].name = e.name
+  formData.value[actionType.value].code = e.code
   // 选择完毕需要校验一下,关闭报错提示
   let idx = cellData.value.findIndex(item => item.prop == actionType.value)
   await handleValidate.value(idx, e.name)

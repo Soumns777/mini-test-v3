@@ -7,39 +7,48 @@ const addressFormData = ref({
   userName: '',
   idCard: '',
   phone: '',
-  address: ''
+  address: {}, // 选择基础地址
+  provinceCityDisrict:{}, // 选择省市区
 })
 // 表单渲染到页面的数据
 const shippingAddress = ref([
-  {
-    label: '姓名',
-    prop: FORM_RULE_TYPE.USER_NAME,
-  },
-  {
-    label: '身份证',
-    prop: FORM_RULE_TYPE.ID_CARD,
-  },
-  {
-    label: '手机号码',
-    prop: FORM_RULE_TYPE.PHONE,
-  },
-  {
-    label: '地址',
-    prop: FORM_RULE_TYPE.ADDRESS,
-    suffixIcon: 'arrow-right',
-    selectType: INPUT_SELECT_TYPE.NORMAL,
-    actions: [
-      {
-        name: '江苏'
-      },
-      {
-        name: '安徽'
-      },
-    ]
-  },
+  // {
+  //   label: '姓名',
+  //   prop:'userName',
+  //   ruleType: FORM_RULE_TYPE.USER_NAME,
+  //
+  // },
+  // {
+  //   label: '身份证',
+  //   prop: 'idCard',
+  //   ruleType: FORM_RULE_TYPE.ID_CARD,
+  // },
+  // {
+  //   label: '手机号码',
+  //   prop: 'phone',
+  //   ruleType: FORM_RULE_TYPE.PHONE,
+  // },
+  // {
+  //   label: '地址',
+  //   prop: 'address',
+  //   ruleType: FORM_RULE_TYPE.ADDRESS,
+  //   suffixIcon: 'arrow-right',
+  //   selectType: INPUT_SELECT_TYPE.NORMAL,
+  //   actions: [
+  //     {
+  //       name: '江苏',
+  //       code:10000901
+  //     },
+  //     {
+  //       name: '安徽',
+  //       code:20920390
+  //     },
+  //   ]
+  // },
   {
     label: '省市区',
-    prop: FORM_RULE_TYPE.PROVINCE_CITY_DISTRICT,
+    prop: 'provinceCityDisrict',
+    ruleType: FORM_RULE_TYPE.PROVINCE_CITY_DISTRICT,
     suffixIcon: 'arrow-right',
     selectType: INPUT_SELECT_TYPE.ADDRESS,
     actions: []

@@ -8,6 +8,7 @@
 import {toast} from "@/services/promiseApi.js";
 import {INPUT_SELECT_TYPE, HTTP_RESULT} from "@/libs/constant.js";
 import {areas} from "@/services/request.js";
+import {useProvinceCityDistrict} from "@/hooks/useArea";
 
 const props = defineProps({
   formData: {
@@ -41,78 +42,25 @@ const handleGetRef = (item, idx) => {
   }
 }
 
-/**
- * @desc 提交表单校验
- */
-
-// 校验表单某个字段
-const handleValidate = async (idx, val) => {
-  await refs[idx + 1].handleVerify(val)
-}
-
-const handleSubmit = () => {
-  return new Promise(async (resolve, reject) => {
-    for (let idx = 0; idx < cellData.value.length; idx++) {
-      try {
-        let current = cellData.value[idx]
-        await refs[idx + 1].handleVerify(formData.value[current.prop])
-        if (idx >= cellData.value.length - 1) {
-          resolve()
-        }
-      } catch (e) {
-        reject(e)
-      }
+// dynamic inpVal
+const dynamicInpVal = computed(()=>{
+  return (formItem)=>{
+    if(formItem.selectType) {
+      return formData.value[formItem.prop].name
+    }else {
+      return formData.value[formItem.prop]
     }
-  })
-}
-
-defineExpose({
-  handleSubmit
+  }
 })
 
 /**
  * @desc 初始化省市区所有数据
  */
 let addressList = ref([])
-const handleInitArea = () => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const province = await handleArea(1)
-      const city = await handleArea(2, province[0].code)
-      const district = await handleArea(3, city[0].code)
-      addressList.value = [province, city, district]
 
-      resolve()
-    } catch (e) {
-      reject(e)
-    }
-  })
-}
-// 处理区域编码
-const handleArea = (level, pid) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      let params = pid ? {level, pid} : {level}
-      const {
-        data: {
-          code: RESULT_CODE,
-          data: RESULT_DATA,
-          message: RESULT_MSG
-        }
-      } = await areas(params);
-      if (RESULT_CODE != HTTP_RESULT.SUCCESS) {
-        return reject(RESULT_MSG)
-      }
-      resolve(RESULT_DATA)
-    } catch (e) {
-      reject(e)
-    }
-  })
-}
-
-
-onLoad(() => {
-  handleInitArea()
+onLoad(async () => {
+  addressList.value = await useProvinceCityDistrict()
+  console.log("💙💛 init province city district",addressList.value)
 })
 
 /**
@@ -137,15 +85,53 @@ const handleSelect = (selectType, prop, actions) => {
   }
 }
 
+/**
+ * @desc update province city district
+ */
+const handleUpdateAddress =  (provinceCityDistrict) => {
+  addressList.value = provinceCityDistrict
+}
 
+
+/**
+ * @desc 提交表单校验
+ */
+
+// 校验表单某个字段
+const handleValidate = async (idx, val) => {
+  await refs[idx + 1].handleVerify(val)
+}
+
+const handleSubmit = () => {
+  return new Promise(async (resolve, reject) => {
+    for (let idx = 0; idx < cellData.value.length; idx++) {
+      try {
+        let current = cellData.value[idx]
+        let dynamicInpVal = current.selectType ? formData.value[current.prop].name : formData.value[current.prop]
+        await refs[idx + 1].handleVerify(dynamicInpVal)
+        if (idx >= cellData.value.length - 1) {
+          resolve()
+        }
+      } catch (e) {
+        reject(e)
+      }
+    }
+  })
+}
+
+defineExpose({
+  handleSubmit,
+  addressList
+})
 </script>
 
 <template>
   <!--  form组件 -->
   <view bg-base rd-sm>
     <s1-form-item v-for="(item,idx) in cellData"
-                  v-model:inpVal="formData[item.prop]"
+                  :inpVal="dynamicInpVal(item)"
                   :defineConfig="item"
+                  v-model:formData="formData"
                   :cellData="cellData"
                   :ref="handleGetRef(item, idx)"
                   :inputAlign="inputAlign"
@@ -164,5 +150,5 @@ const handleSelect = (selectType, prop, actions) => {
                    ref="actionSheetRef"/>
 
   <!-- picker(选择省市区) -->
-  <s1-picker ref="pickerRef"/>
+  <s1-picker  v-model:handleValidate="handleValidate" v-model:formData="formData" v-model:cellData="cellData" v-model:addressList="addressList" ref="pickerRef"/>
 </template>

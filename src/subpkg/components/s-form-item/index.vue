@@ -13,10 +13,14 @@ import {INPUT_ALIGN_TYPE} from "@/libs/constant.js";
 const emits = defineEmits()
 const props = defineProps({
   inpVal: {
-    type: [String, Number],
+    type: [String, Number,Array],
     required: false,
   },
   defineConfig: {
+    type: Object,
+    required: true,
+  },
+  formData:{
     type: Object,
     required: true,
   },
@@ -38,6 +42,7 @@ const props = defineProps({
 const {
   inpVal,
   defineConfig,
+  formData,
   cellData,
   inputAlign,
   labelWidth
@@ -115,6 +120,8 @@ let errorMessage = ref("")
 const handleChange = async (e) => {
   try {
     emits('update:inpVal', e.detail.value)
+    formData.value[defineConfig.value.prop] = e.detail.value
+
     await handleVerify(e.detail.value)
   } catch (e) {
   }
@@ -123,7 +130,7 @@ const handleChange = async (e) => {
 const handleVerify = (value) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let formRules = useVerify(defineConfig.value.prop)
+      let formRules = useVerify(defineConfig.value.ruleType)
       for (let idx = 0; idx < formRules.length; idx++) {
         let current = formRules[idx]
         if (current.required && !value) {
