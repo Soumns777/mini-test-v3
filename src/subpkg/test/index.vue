@@ -46,18 +46,18 @@ const shippingAddress = ref([
   //     },
   //   ]
   // },
-  {
-    label: '省市区',
-    prop: 'provinceCityDisrict',
-    ruleType: FORM_RULE_TYPE.PROVINCE_CITY_DISTRICT,
-    selectType: INPUT_SELECT_TYPE.ADDRESS,
-  },
+  // {
+  //   label: '省市区',
+  //   prop: 'provinceCityDisrict',
+  //   ruleType: FORM_RULE_TYPE.PROVINCE_CITY_DISTRICT,
+  //   selectType: INPUT_SELECT_TYPE.ADDRESS,
+  // },
 
   {
     label: '验证码',
     prop: 'verifyCode',
-    countDown:60,
-    uniqueKey:'test',
+    countDown: 60,
+    uniqueKey: 'test',
     ruleType: FORM_RULE_TYPE.VERIFY_CODE,
   },
 
@@ -111,6 +111,9 @@ const handleGetRef = (item, idx) => {
 
 <template>
   <view class="container bg-[#f6f6f6]" min-w-h pt-40>
+
+    <!--    <view w-all h-home-calc bg-godds/>-->
+
     <view mb-30 v-for="(item,idx) in duoweiFormData" :key="idx" px-30>
       <s1-form v-model:formData="item.formData" v-model:cellData="item.cellData"
                :ref="handleGetRef(item, idx)"

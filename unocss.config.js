@@ -20,6 +20,7 @@ export default {
         },
         height: {
             all: '100%',
+            "home-calc": "calc(100vh - 200rpx)"
         },
         colors: {
             base: '#fff', // 白色
