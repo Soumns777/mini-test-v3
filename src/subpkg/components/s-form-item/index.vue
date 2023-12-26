@@ -136,12 +136,29 @@ const handleVerify = (value) => {
         if (current.required && !value) {
           errorMessage.value = current.message
           return reject(current.message)
-        } else if (current.validator && !(current.validator(value))) {
-          errorMessage.value = current.message
-          return reject(current.message)
+        } else if (current.validator) {
+
+          if (current.async) {
+            const res = await current.validator(value)
+            console.log("💙💛验证短信验证码", res)
+
+            if (!res) {
+              errorMessage.value = current.message
+              return reject(current.message)
+            }
+
+          } else {
+            const res = current.validator(value)
+
+            if (!res) {
+              errorMessage.value = current.message
+              return reject(current.message)
+            }
+          }
         } else {
           errorMessage.value = ''
         }
+
         if (idx >= formRules.length - 1) {
           resolve()
         }

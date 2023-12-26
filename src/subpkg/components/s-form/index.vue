@@ -6,8 +6,7 @@
 -->
 <script setup name="sForm">
 import {toast} from "@/services/promiseApi.js";
-import {INPUT_SELECT_TYPE, HTTP_RESULT} from "@/libs/constant.js";
-import {areas} from "@/services/request.js";
+import {INPUT_SELECT_TYPE} from "@/libs/constant.js";
 import {useProvinceCityDistrict} from "@/hooks/useArea";
 
 const props = defineProps({
@@ -79,7 +78,7 @@ const handleUpdateAddress = (provinceCityDistrict) => {
   addressList.value = provinceCityDistrict
 }
 onLoad(async () => {
-  addressList.value = await useProvinceCityDistrict()
+  // addressList.value = await useProvinceCityDistrict()
 })
 
 /**
@@ -135,6 +134,37 @@ defineExpose({
   handleSubmit,
   addressList
 })
+
+
+/**
+ * @desc 发送短信
+ */
+const verifyCode = ref('')
+const uCodeRef = ref(null)
+const handleSendCode = () => {
+  try {
+    uCodeRef.value.start()
+  } catch (e) {
+
+  }
+}
+
+const handleCountDown = () => {
+  try {
+    console.log("💙💛开启倒计时")
+  } catch (e) {
+
+  }
+}
+
+const handleCodeChange = (text) => {
+  try {
+    console.log("💙💛text", text)
+    verifyCode.value = text
+  } catch (e) {
+
+  }
+}
 </script>
 
 <template>
@@ -150,14 +180,13 @@ defineExpose({
                   :labelWidth="labelWidth"
                   :key="idx">
 
-      <template #suffix pr v-if="item.selectType">
-        <view pa right-0 top--20 w-500 h-70 op-0 z-2 @click="handleSelect(item.selectType,item.prop,item.actions)"/>
-        <u-icon :name="dynamicSuffixIcon(item)" size="17" color="#B4B4B5"/>
-
-        <u-code start-text="发送验证码" change-text="Xs" :seconds="item.countDown"
-                ref="uCode"
-                @change="handleCodeChange" keepRunning @start="handleCountDown" @end="handleCountDown" unique-key="">>
-        </u-code>
+      <template #suffix pr>
+        <view pa right-0 top--20 w-500 h-70 op-0 z-2 @click="handleSelect(item.selectType,item.prop,item.actions)"
+              v-if="item.selectType"/>
+        <u-icon :name="dynamicSuffixIcon(item)" size="17" color="#B4B4B5" v-if="item.selectType"/>
+        
+        <!-- verify code -->
+        <s1-verify-code :seconds="item.seconds" :uniqueKey="item.uniqueKey" v-if="item.isVerifyCode"/>
       </template>
     </s1-form-item>
   </view>

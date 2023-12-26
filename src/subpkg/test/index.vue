@@ -14,11 +14,11 @@ const addressFormData = ref({
 })
 // 表单渲染到页面的数据
 const shippingAddress = ref([
-  // {
-  //   label: '姓名',
-  //   prop: 'userName',
-  //   ruleType: FORM_RULE_TYPE.USER_NAME,
-  // },
+  {
+    label: '姓名',
+    prop: 'userName',
+    ruleType: FORM_RULE_TYPE.USER_NAME,
+  },
   // {
   //   label: '身份证',
   //   prop: 'idCard',
@@ -56,9 +56,10 @@ const shippingAddress = ref([
   {
     label: '验证码',
     prop: 'verifyCode',
-    countDown: 60,
+    seconds: 5,
     uniqueKey: 'test',
     ruleType: FORM_RULE_TYPE.VERIFY_CODE,
+    isVerifyCode: true
   },
 
 ])
@@ -107,12 +108,11 @@ const handleGetRef = (item, idx) => {
   }
 }
 
+
 </script>
 
 <template>
   <view class="container bg-[#f6f6f6]" min-w-h pt-40>
-
-    <!--    <view w-all h-home-calc bg-godds/>-->
 
     <view mb-30 v-for="(item,idx) in duoweiFormData" :key="idx" px-30>
       <s1-form v-model:formData="item.formData" v-model:cellData="item.cellData"
@@ -124,6 +124,7 @@ const handleGetRef = (item, idx) => {
     <view f-c-c>
       <button w-600 h-100 mt-100 @click="handleSubmit" s-btn-blue>Submit</button>
     </view>
+
 
   </view>
 </template>

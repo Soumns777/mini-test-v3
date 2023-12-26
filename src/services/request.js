@@ -23,11 +23,14 @@ export const areas = (params) => {
 }
 
 
+/**
+ * @desc 校验短信验证码
+ * @param code {string} 验证码
+ */
 
-
-
-
-
+export const codeVerify = (params) => {
+    return $http.post('/code-verify', params)
+}
 
 
 

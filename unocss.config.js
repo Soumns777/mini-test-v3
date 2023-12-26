@@ -34,6 +34,7 @@ export default {
             repayPlan: '#F3F3F3', // 还款列表背景颜色
             goRepay: '#087FFF', // 去还款按钮背景颜色
             spxq: 'linear-gradient(NaNdeg, #6298FF 0%, #A8D5FF 0%)', // 商品详情
+            verifyCode: '#C69859', // 验证码
         },
         boxShadow: {
             '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',

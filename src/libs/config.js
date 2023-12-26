@@ -6,7 +6,7 @@
 let BASE_URL;
 
 if (process.env.NODE_ENV === 'development') {
-    BASE_URL = ''
+    BASE_URL = 'http://localhost:3002/api'
 } else {
     BASE_URL = ''
 }
