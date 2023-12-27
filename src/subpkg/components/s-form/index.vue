@@ -119,7 +119,12 @@ const handleSubmit = () => {
       try {
         let current = cellData.value[idx]
         let dynamicInpVal = current.selectType ? formData.value[current.prop].name : formData.value[current.prop]
-        await refs[idx + 1].handleVerify(dynamicInpVal)
+        try {
+          await refs[idx + 1].handleVerify(dynamicInpVal)
+        } catch (e) {
+          return reject(e)
+        }
+
         if (idx >= cellData.value.length - 1) {
           resolve()
         }
@@ -136,35 +141,6 @@ defineExpose({
 })
 
 
-/**
- * @desc 发送短信
- */
-const verifyCode = ref('')
-const uCodeRef = ref(null)
-const handleSendCode = () => {
-  try {
-    uCodeRef.value.start()
-  } catch (e) {
-
-  }
-}
-
-const handleCountDown = () => {
-  try {
-    console.log("💙💛开启倒计时")
-  } catch (e) {
-
-  }
-}
-
-const handleCodeChange = (text) => {
-  try {
-    console.log("💙💛text", text)
-    verifyCode.value = text
-  } catch (e) {
-
-  }
-}
 </script>
 
 <template>
@@ -184,9 +160,11 @@ const handleCodeChange = (text) => {
         <view pa right-0 top--20 w-500 h-70 op-0 z-2 @click="handleSelect(item.selectType,item.prop,item.actions)"
               v-if="item.selectType"/>
         <u-icon :name="dynamicSuffixIcon(item)" size="17" color="#B4B4B5" v-if="item.selectType"/>
-        
+
         <!-- verify code -->
-        <s1-verify-code :seconds="item.seconds" :uniqueKey="item.uniqueKey" v-if="item.isVerifyCode"/>
+        <s1-verify-code :phoneNumber="dynamicInpVal(item)" :borderColor="item.borderColor" :color="item.color"
+                        :seconds="item.seconds"
+                        :uniqueKey="item.uniqueKey" v-if="item.isVerifyCode"/>
       </template>
     </s1-form-item>
   </view>

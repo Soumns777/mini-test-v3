@@ -5,7 +5,13 @@
    * @Date: 2023年12月25日10:52:51
 -->
 <script setup name="sVerifyCode">
+import {toast} from "@/services/promiseApi.js";
+
 const props = defineProps({
+  phoneNumber: {
+    type: [String, Number],
+    required: false,
+  },
   seconds: {
     type: [String, Number],
     required: false,
@@ -15,10 +21,21 @@ const props = defineProps({
     type: String,
     required: false,
   },
+  color: {
+    type: String,
+    required: false,
+    default: '#C69859'
+  },
+  borderColor: {
+    type: String,
+    required: false,
+    default: "#CF964D"
+  },
 })
 const {
   seconds,
-  uniqueKey
+  uniqueKey,
+  phoneNumber
 } = toRefs(props)
 
 const verifyCode = ref('')
@@ -29,6 +46,9 @@ const uCodeRef = ref(null)
  * @desc send verify code
  */
 const handleSendCode = () => {
+  if (!uni.$u.test.mobile(phoneNumber.value)) {
+    return toast('请正确输入手机号', 2000)
+  }
   uCodeRef.value.start()
 }
 
@@ -42,7 +62,8 @@ const handleCodeChange = (text) => {
 </script>
 
 <template>
-  <button min-w-0 h-50 px-10 b="1 solid red" ml-20 rd-sm f-c-c bg-base text="24 verifyCode" @tap="handleSendCode">{{
+  <button h-50 px-10 b="1 solid" b-borderColor ml-20 rd-sm f-c-c bg-base text="24" :style="{color,borderColor}"
+          @tap="handleSendCode">{{
       verifyCode
     }}
   </button>

@@ -137,28 +137,16 @@ const handleVerify = (value) => {
           errorMessage.value = current.message
           return reject(current.message)
         } else if (current.validator) {
-
-          if (current.async) {
-            const res = await current.validator(value)
-            console.log("💙💛验证短信验证码", res)
-
-            if (!res) {
-              errorMessage.value = current.message
-              return reject(current.message)
-            }
-
-          } else {
-            const res = current.validator(value)
-
-            if (!res) {
-              errorMessage.value = current.message
-              return reject(current.message)
-            }
+          let res = ''
+          // 异步校验 async:true
+          res = current.async ? await current.validator(value) : current.validator(value)
+          if (!res) {
+            errorMessage.value = current.message
+            return reject(current.message)
           }
         } else {
           errorMessage.value = ''
         }
-
         if (idx >= formRules.length - 1) {
           resolve()
         }

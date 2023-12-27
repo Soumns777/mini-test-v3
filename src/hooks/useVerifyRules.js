@@ -52,12 +52,11 @@ export const useVerify = (prop) => {
                     return uni.$u.test.code(value);
                 }, message: '验证码格式不正确',
             }, {
-                async: true,
+                async: true, // 异步校验
                 validator: (value) => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                            const res = await useVerifyCode(value)
-                            resolve(res)
+                            resolve(await useVerifyCode(value))
                         } catch (e) {
                             resolve(false)
                         }

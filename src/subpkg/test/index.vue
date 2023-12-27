@@ -24,11 +24,16 @@ const shippingAddress = ref([
   //   prop: 'idCard',
   //   ruleType: FORM_RULE_TYPE.ID_CARD,
   // },
-  // {
-  //   label: '手机号码',
-  //   prop: 'phone',
-  //   ruleType: FORM_RULE_TYPE.PHONE,
-  // },
+
+
+  {
+    label: '手机号码',
+    prop: 'phone',
+    ruleType: FORM_RULE_TYPE.PHONE,
+    isVerifyCode: true,
+    seconds: 5,
+    uniqueKey: 'test',
+  },
   // {
   //   label: '地址',
   //   prop: 'address',
@@ -56,10 +61,7 @@ const shippingAddress = ref([
   {
     label: '验证码',
     prop: 'verifyCode',
-    seconds: 5,
-    uniqueKey: 'test',
     ruleType: FORM_RULE_TYPE.VERIFY_CODE,
-    isVerifyCode: true
   },
 
 ])
