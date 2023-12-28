@@ -44,11 +44,8 @@ export default {
             'circle': '50%',
             'sm': '15rpx',
             'lg': '25rpx',
-            'pgxl': '0 0 25rpx 25rpx', // 苹果系列
-            'spxq': '3rpx',// 商品详情
-            'xzgg': '35rpx',
-            'cs': '20rpx', // 商品成色
-            'order-qd': '44rpx' // 确定订单
+            'idCard': '16rpx'
+
         },
         lineHeight: {
             custom: '40rpx',

@@ -164,9 +164,17 @@ defineExpose({
         <!-- verify code -->
         <s1-verify-code :phoneNumber="dynamicInpVal(item)" :borderColor="item.borderColor" :color="item.color"
                         :seconds="item.seconds"
-                        :uniqueKey="item.uniqueKey" v-if="item.isVerifyCode"/>
+                        :uniqueKey="item.uniqueKey" v-if="item.uniqueKey"/>
       </template>
     </s1-form-item>
+  </view>
+
+  <view h-336 f-c j-c-b mt-20 w-all>
+    <view w-335 h-all bg-base rd-sm pt-59>
+      <view w-275 h-186/>
+
+    </view>
+    <view w-335 h-all bg-base rd-sm>22</view>
   </view>
 
   <!-- action-sheet -->
@@ -176,4 +184,6 @@ defineExpose({
   <!-- picker(选择省市区) -->
   <s1-picker v-model:handleValidate="handleValidate" v-model:formData="formData" v-model:cellData="cellData"
              v-model:addressList="addressList" ref="pickerRef"/>
+
+
 </template>

@@ -30,8 +30,7 @@ const shippingAddress = ref([
     label: '手机号码',
     prop: 'phone',
     ruleType: FORM_RULE_TYPE.PHONE,
-    isVerifyCode: true,
-    seconds: 5,
+    // seconds: 5,
     uniqueKey: 'test',
   },
   // {
