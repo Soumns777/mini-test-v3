@@ -8,6 +8,7 @@
 import {toast} from "@/services/promiseApi.js";
 import {INPUT_SELECT_TYPE} from "@/libs/constant.js";
 import {useProvinceCityDistrict} from "@/hooks/useArea";
+import {IMG_URL} from '@/libs/config.js'
 
 const props = defineProps({
   formData: {
@@ -144,8 +145,8 @@ defineExpose({
 </script>
 
 <template>
-  <!--  form组件 -->
-  <view bg-base rd-sm>
+  <!--  costom-form -->
+  <view bg-base rd-sm mt-30>
     <s1-form-item v-for="(item,idx) in cellData"
                   :inpVal="dynamicInpVal(item)"
                   :defineConfig="item"
@@ -169,13 +170,8 @@ defineExpose({
     </s1-form-item>
   </view>
 
-  <view h-336 f-c j-c-b mt-20 w-all>
-    <view w-335 h-all bg-base rd-sm pt-59>
-      <view w-275 h-186/>
-
-    </view>
-    <view w-335 h-all bg-base rd-sm>22</view>
-  </view>
+  <!-- idcard-upload -->
+  <s1-upload-idcard/>
 
   <!-- action-sheet -->
   <s1-action-sheet v-model:handleValidate="handleValidate" v-model:formData="formData" v-model:cellData="cellData"

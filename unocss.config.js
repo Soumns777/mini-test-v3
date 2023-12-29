@@ -44,8 +44,9 @@ export default {
             'circle': '50%',
             'sm': '15rpx',
             'lg': '25rpx',
-            'idCard': '16rpx'
-
+            'idCard': '16rpx', // 身份证外边框
+            "show-circle": "0 100px 100px 0",
+            'idCard-img': '8rpx', // 身份证里面图片
         },
         lineHeight: {
             custom: '40rpx',
@@ -131,6 +132,16 @@ export default {
         [
             'j-c-c',
             'justify-center'
+        ],
+        // 背景图全覆盖
+        [
+            'bg-all',
+            'bg-cover bg-no-repeat'
+        ],
+        // 定位居中
+        [
+            'dw-center',
+            'pa left-0 right-0 top-0 bottom-0 m-auto'
         ],
         // flex动态样式布局
         [

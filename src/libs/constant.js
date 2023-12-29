@@ -32,6 +32,12 @@ export const INPUT_SELECT_TYPE = {
 }
 
 
+// upload-idcard-type
+export const UPLOAD_IDCARD_TYPE = {
+    RENXIANG: 'front', // 人像面
+    GUOHUI: 'back'// 国徽面
+}
+
 
 
 
