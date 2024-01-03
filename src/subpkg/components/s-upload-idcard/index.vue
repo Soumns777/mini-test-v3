@@ -5,12 +5,14 @@
    * @Date: 2023年12月29日14:43:31
 -->
 <script setup name="sUploadIdcard">
-import {IMG_URL} from "@/libs/config.js";
+import {BASE_URL, IMG_URL} from "@/libs/config.js";
 import {UPLOAD_IDCARD_TYPE} from "@/libs/constant.js";
+import useUploadFiles from "@/hooks/useUploadFiles.js";
+import {toast} from "@/services/promiseApi.js";
 
 
 // 身份证正反面
-const IDNUMBER__FRONT_BACK = ref([
+const IDNUMBER_FRONT_BACK = ref([
   {
     id: 1,
     type: UPLOAD_IDCARD_TYPE.RENXIANG,
@@ -29,6 +31,35 @@ const IDNUMBER__FRONT_BACK = ref([
   },
 ])
 
+
+/**
+ * @desc 上传身份证图片
+ */
+
+const {customChoose} = useUploadFiles()
+const handleUploadFile = async (uploadType) => {
+  try {
+    let params = {
+      url: BASE_URL + '/upload',
+      count: 3,
+      uploadType,
+      formData: {
+        identity: 0,
+      },
+      token: "Bearer 258|CqnbbRRYaplCR6ejEVNqq6YF1hlOZg0EWHsJaPsUda32d08d",
+      filePath: ""
+    }
+    const res = await customChoose(params)
+    console.log("💙💛上传图片返回数据", res)
+
+    let idx = IDNUMBER_FRONT_BACK.value.findIndex(item => item.type == uploadType)
+    let imgUrl = res.filter(item => item.type == uploadType)[0].imgUrl
+    IDNUMBER_FRONT_BACK.value[idx].idcardImg = imgUrl
+  } catch (e) {
+    console.log("💙💛上传图片失败", e)
+    toast(e, 2000)
+  }
+}
 </script>
 
 <template>
@@ -38,20 +69,26 @@ const IDNUMBER__FRONT_BACK = ref([
   </view>
 
   <view h-336 f-c j-c-b mt-20 w-all>
-    <view w-335 h-all bg-base rd-sm pt-40 v-for="(item,idx) in IDNUMBER__FRONT_BACK" :key="idx">
+    <view w-335 h-all bg-base rd-sm pt-40 v-for="(item,idx) in IDNUMBER_FRONT_BACK" :key="idx">
       <view f-c-c f-col>
         <view w-275 h-186 bg-all f-c-c
-              :style="{backgroundImage: `url(${item.backgroundImg})`}" pr>
-          <image w-255 h-148 mode="aspectFill" rd-idCard-img class="bg-[#DADBDF]"
-                 :src="item.idcardImg"/>
-          <image
-              w-56 h-42
-              dw-center
-              :src="item.uploadAgainImg"
-              mode="aspectFit"
-          />
+              :style="{backgroundImage: `url(${item.backgroundImg})`}" pr @click="handleUploadFile(item.type)">
+
+          <view pr w-255 h-148>
+            <!--  mask -->
+            <view pa top-0 left-0 w-all h-all rd-idCard-img op-20 z-2 class="bg-[#474A62]"/>
+            <image w-all h-all mode="aspectFill"
+                   :src="item.idcardImg" rd-idCard-img/>
+            <image
+                w-56 h-42
+                dw-center
+                :src="item.uploadAgainImg"
+                mode="aspectFit"
+            />
+          </view>
+
         </view>
-        <text text="28 #858585" mt-30>{{ item.text}}</text>
+        <text text="28 #858585" mt-30>{{ item.text }}</text>
       </view>
     </view>
   </view>

@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'development') {
     BASE_URL = ''
 }
 
-console.log("💙💛请求api基地址", BASE_URL)
+console.log("💙💛请求api基地址", BASE_URL, '图片基地址:', IMG_URL)
 
 
 const TIME_OUT = '10000'

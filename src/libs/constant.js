@@ -4,7 +4,7 @@
 
 // http request code
 export const HTTP_RESULT = {
-    SUCCESS: '0000'
+    SUCCESS: '200'
 }
 
 // input-form-rules

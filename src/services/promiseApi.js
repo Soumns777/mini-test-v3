@@ -9,6 +9,22 @@ export const toast = function (title = '数据处理失败', duration = 2000, ic
 
 
 /**
+ * @desc uni.showLoading
+ */
+export const showLoading = function (title = '加载中...') {
+    return uni.showLoading({
+        title,
+    })
+}
+
+/**
+ * @desc uni.hideLoading
+ */
+export const hideLoading = function (title = '加载中...') {
+    return uni.hideLoading()
+}
+
+/**
  * @desc uni.showModal
  */
 export const showModal = function (title = '提示', content, showCancel = true) {
@@ -27,7 +43,7 @@ export const showModal = function (title = '提示', content, showCancel = true)
 /**
  * @desc 选择图片
  */
-export const chooseImage = (type = ['album', 'camera', 'user'], count = 1) => {
+export const chooseImage = (type = ['album', 'camera',], count = 1) => {
     return new Promise((resolve, reject) => {
         uni.chooseMedia({
             sourceType: type, // 来源:相机/图库
@@ -36,6 +52,29 @@ export const chooseImage = (type = ['album', 'camera', 'user'], count = 1) => {
             }, fail(err) {
                 reject(err)
             }
+        })
+    })
+}
+
+/**
+ * @desc 图片上传
+ */
+export const uploadImage = (params) => {
+    showLoading('上传中...')
+    const {
+        url, token, filePath, formData
+    } = params
+    return new Promise((resolve, reject) => {
+        uni.uploadFile({
+            url, header: {
+                "Authorization": token
+            }, formData, name: 'file', filePath, success: (fileData) => {
+                hideLoading()
+                resolve(fileData)
+            }, fail: (err) => {
+                hideLoading()
+                reject(err)
+            },
         })
     })
 }
@@ -126,3 +165,4 @@ export const sendSubscribeMessage = (tmplId) => {
         })
     })
 }
+
