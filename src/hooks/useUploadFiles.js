@@ -45,6 +45,7 @@ export default function useUploadFiles() {
         return new Promise(async (resolve, reject) => {
             try {
                 params.filePath = filePath
+                console.log("💙💛上传单张照片请求参数", params)
                 const {data: res} = await uploadImage(params)
                 let {
                     code: RESULT_CODE,

@@ -46,7 +46,9 @@ const handleUploadFile = async (uploadType) => {
       formData: {
         identity: 0,
       },
-      token: "Bearer 258|CqnbbRRYaplCR6ejEVNqq6YF1hlOZg0EWHsJaPsUda32d08d",
+      // prod Bearer 266|G51SJuT0g4NUhuLzR15lJA83rdeTtoFrDo1ebgqs7f772be0
+      // test Bearer 258|CqnbbRRYaplCR6ejEVNqq6YF1hlOZg0EWHsJaPsUda32d08d
+      token: "Bearer 266|G51SJuT0g4NUhuLzR15lJA83rdeTtoFrDo1ebgqs7f772be0",
       filePath: ""
     }
     const res = await customChoose(params)

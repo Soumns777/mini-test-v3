@@ -1,6 +1,7 @@
 <script setup>
 import {toast} from '@/services/promiseApi.js'
-import {FORM_RULE_TYPE, INPUT_SELECT_TYPE, HTTP_RESULT} from "@/libs/constant.js";
+import {FORM_RULE_TYPE, INPUT_SELECT_TYPE, HTTP_RESULT, UPLOAD_IDCARD_TYPE} from "@/libs/constant.js";
+import {IMG_URL} from "@/libs/config.js";
 
 
 const addressFormData = ref({
@@ -62,6 +63,28 @@ const shippingAddress = ref([
     prop: 'verifyCode',
     ruleType: FORM_RULE_TYPE.VERIFY_CODE,
   },
+  {
+    prop: 'upload',
+    ruleType: FORM_RULE_TYPE.UPLOAD_FILE,
+    uploadedFiles: [
+      {
+        id: 1,
+        type: UPLOAD_IDCARD_TYPE.RENXIANG,
+        backgroundImg: IMG_URL + 'rongezu_upload_srxm_border.jpg',
+        idcardImg: IMG_URL + 'rongezu_upload_renxiangmian.png',
+        uploadAgainImg: IMG_URL + 'rongezu_uploader.png',
+        text: '拍摄身份证人像面'
+      },
+      {
+        id: 2,
+        type: UPLOAD_IDCARD_TYPE.GUOHUI,
+        backgroundImg: IMG_URL + 'rongezu_upload_srxm_border.jpg',
+        idcardImg: IMG_URL + 'rongezu_upload_guohuimian.png',
+        uploadAgainImg: IMG_URL + 'rongezu_uploader.png',
+        text: '拍摄身份证国徽面'
+      },
+    ]
+  }
 
 ])
 

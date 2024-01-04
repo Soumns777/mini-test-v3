@@ -32,6 +32,7 @@ const {
   formData,
   cellData,
 } = toRefs(props)
+console.log("💙💛初始化cellData", cellData.value)
 /**
  * @desc 初始化子组件ref
  */

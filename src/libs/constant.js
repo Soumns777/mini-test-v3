@@ -15,6 +15,7 @@ export const FORM_RULE_TYPE = {
     ADDRESS: 'address', // 地址
     PROVINCE_CITY_DISTRICT: 'provinceCityDisrict', // 省市区
     VERIFY_CODE: 'verifyCode', // 验证码
+    UPLOAD_FILE: 'uploadFile' // 上传文件
 }
 
 // input-align-type
