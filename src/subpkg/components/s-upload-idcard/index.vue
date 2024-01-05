@@ -10,26 +10,15 @@ import {UPLOAD_IDCARD_TYPE} from "@/libs/constant.js";
 import useUploadFiles from "@/hooks/useUploadFiles.js";
 import {toast} from "@/services/promiseApi.js";
 
-
-// 身份证正反面
-const IDNUMBER_FRONT_BACK = ref([
-  {
-    id: 1,
-    type: UPLOAD_IDCARD_TYPE.RENXIANG,
-    backgroundImg: IMG_URL + 'rongezu_upload_srxm_border.jpg',
-    idcardImg: IMG_URL + 'rongezu_upload_renxiangmian.png',
-    uploadAgainImg: IMG_URL + 'rongezu_uploader.png',
-    text: '拍摄身份证人像面'
+const props = defineProps({
+  uploadedFiles: {
+    type: Array,
+    required: true,
   },
-  {
-    id: 2,
-    type: UPLOAD_IDCARD_TYPE.GUOHUI,
-    backgroundImg: IMG_URL + 'rongezu_upload_srxm_border.jpg',
-    idcardImg: IMG_URL + 'rongezu_upload_guohuimian.png',
-    uploadAgainImg: IMG_URL + 'rongezu_uploader.png',
-    text: '拍摄身份证国徽面'
-  },
-])
+})
+const {
+  uploadedFiles,
+} = toRefs(props)
 
 
 /**
@@ -54,12 +43,14 @@ const handleUploadFile = async (uploadType) => {
     const res = await customChoose(params)
     console.log("💙💛上传图片返回数据", res)
 
-    let idx = IDNUMBER_FRONT_BACK.value.findIndex(item => item.type == uploadType)
+    let idx = uploadedFiles.value.findIndex(item => item.type == uploadType)
     let imgUrl = res.filter(item => item.type == uploadType)[0].imgUrl
-    IDNUMBER_FRONT_BACK.value[idx].idcardImg = imgUrl
+    uploadedFiles.value[idx].idcardImg = imgUrl
+
+
   } catch (e) {
     console.log("💙💛上传图片失败", e)
-    toast(e, 2000)
+    toast('上传图片失败', 2000)
   }
 }
 </script>
@@ -71,7 +62,7 @@ const handleUploadFile = async (uploadType) => {
   </view>
 
   <view h-336 f-c j-c-b mt-20 w-all>
-    <view w-335 h-all bg-base rd-sm pt-40 v-for="(item,idx) in IDNUMBER_FRONT_BACK" :key="idx">
+    <view w-335 h-all bg-base rd-sm pt-40 v-for="(item,idx) in uploadedFiles" :key="idx">
       <view f-c-c f-col>
         <view w-275 h-186 bg-all f-c-c
               :style="{backgroundImage: `url(${item.backgroundImg})`}" pr @click="handleUploadFile(item.type)">
@@ -91,6 +82,7 @@ const handleUploadFile = async (uploadType) => {
 
         </view>
         <text text="28 #858585" mt-30>{{ item.text }}</text>
+        <text text="24 #f56c6c" v-show="item.errorMessage">请{{ item.text }}</text>
       </view>
     </view>
   </view>

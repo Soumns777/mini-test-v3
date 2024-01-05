@@ -6,7 +6,7 @@
 -->
 <script setup name="sForm">
 import {toast} from "@/services/promiseApi.js";
-import {INPUT_SELECT_TYPE} from "@/libs/constant.js";
+import {FORM_RULE_TYPE, INPUT_SELECT_TYPE} from "@/libs/constant.js";
 import {useProvinceCityDistrict} from "@/hooks/useArea";
 import {IMG_URL} from '@/libs/config.js'
 
@@ -32,7 +32,10 @@ const {
   formData,
   cellData,
 } = toRefs(props)
-console.log("💙💛初始化cellData", cellData.value)
+
+// 上传类型的cell
+const uploadCell = cellData.value.filter(item => item.ruleType == FORM_RULE_TYPE.UPLOAD_FILE)[0]
+const otherCell = cellData.value.filter(item => item.ruleType != FORM_RULE_TYPE.UPLOAD_FILE)
 /**
  * @desc 初始化子组件ref
  */
@@ -146,7 +149,7 @@ defineExpose({
 </script>
 
 <template>
-  <!--  costom-form -->
+  <!--  custom-form -->
   <view bg-base rd-sm mt-30>
     <s1-form-item v-for="(item,idx) in cellData"
                   :inpVal="dynamicInpVal(item)"
@@ -163,7 +166,7 @@ defineExpose({
               v-if="item.selectType"/>
         <u-icon :name="dynamicSuffixIcon(item)" size="17" color="#B4B4B5" v-if="item.selectType"/>
 
-        <!-- verify code -->
+        <!-- verify-code -->
         <s1-verify-code :phoneNumber="dynamicInpVal(item)" :borderColor="item.borderColor" :color="item.color"
                         :seconds="item.seconds"
                         :uniqueKey="item.uniqueKey" v-if="item.uniqueKey"/>
@@ -172,7 +175,7 @@ defineExpose({
   </view>
 
   <!-- idcard-upload -->
-  <s1-upload-idcard/>
+  <!--  <s1-upload-idcard ref="idcardUpload" v-model:uploadedFiles="uploadCell.uploadedFiles"/>-->
 
   <!-- action-sheet -->
   <s1-action-sheet v-model:handleValidate="handleValidate" v-model:formData="formData" v-model:cellData="cellData"

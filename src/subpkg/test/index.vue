@@ -20,20 +20,19 @@ const shippingAddress = ref([
     prop: 'userName',
     ruleType: FORM_RULE_TYPE.USER_NAME,
   },
-  // {
-  //   label: '身份证',
-  //   prop: 'idCard',
-  //   ruleType: FORM_RULE_TYPE.ID_CARD,
-  // },
-
-
   {
-    label: '手机号码',
-    prop: 'phone',
-    ruleType: FORM_RULE_TYPE.PHONE,
-    // seconds: 5,
-    uniqueKey: 'test',
+    label: '身份证',
+    prop: 'idCard',
+    ruleType: FORM_RULE_TYPE.ID_CARD,
   },
+
+
+  // {
+  //   label: '手机号码',
+  //   prop: 'phone',
+  //   ruleType: FORM_RULE_TYPE.PHONE,
+  //   uniqueKey: 'test',
+  // },
   // {
   //   label: '地址',
   //   prop: 'address',
@@ -63,28 +62,28 @@ const shippingAddress = ref([
     prop: 'verifyCode',
     ruleType: FORM_RULE_TYPE.VERIFY_CODE,
   },
-  {
-    prop: 'upload',
-    ruleType: FORM_RULE_TYPE.UPLOAD_FILE,
-    uploadedFiles: [
-      {
-        id: 1,
-        type: UPLOAD_IDCARD_TYPE.RENXIANG,
-        backgroundImg: IMG_URL + 'rongezu_upload_srxm_border.jpg',
-        idcardImg: IMG_URL + 'rongezu_upload_renxiangmian.png',
-        uploadAgainImg: IMG_URL + 'rongezu_uploader.png',
-        text: '拍摄身份证人像面'
-      },
-      {
-        id: 2,
-        type: UPLOAD_IDCARD_TYPE.GUOHUI,
-        backgroundImg: IMG_URL + 'rongezu_upload_srxm_border.jpg',
-        idcardImg: IMG_URL + 'rongezu_upload_guohuimian.png',
-        uploadAgainImg: IMG_URL + 'rongezu_uploader.png',
-        text: '拍摄身份证国徽面'
-      },
-    ]
-  }
+  // {
+  //   prop: 'upload',
+  //   ruleType: FORM_RULE_TYPE.UPLOAD_FILE,
+  //   uploadedFiles: [
+  //     {
+  //       id: 1,
+  //       type: UPLOAD_IDCARD_TYPE.RENXIANG,
+  //       backgroundImg: IMG_URL + 'rongezu_upload_srxm_border.jpg',
+  //       idcardImg: IMG_URL + 'rongezu_upload_renxiangmian.png',
+  //       uploadAgainImg: IMG_URL + 'rongezu_uploader.png',
+  //       text: '拍摄身份证人像面',
+  //     },
+  //     {
+  //       id: 2,
+  //       type: UPLOAD_IDCARD_TYPE.GUOHUI,
+  //       backgroundImg: IMG_URL + 'rongezu_upload_srxm_border.jpg',
+  //       idcardImg: IMG_URL + 'rongezu_upload_guohuimian.png',
+  //       uploadAgainImg: IMG_URL + 'rongezu_uploader.png',
+  //       text: '拍摄身份证国徽面',
+  //     },
+  //   ]
+  // }
 
 ])
 

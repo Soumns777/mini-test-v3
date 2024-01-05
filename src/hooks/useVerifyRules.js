@@ -62,8 +62,19 @@ export const useVerify = (prop) => {
                         }
                     })
                 }, message: '验证码不正确',
-            },]
+            }]
         }
+        case FORM_RULE_TYPE.UPLOAD_FILE: {
+            return [
+                {
+                    validator: (value) => {
+                        console.log("💙💛value", value)
+                    },
+                    message: '请正确上传身份证',
+                },
+            ]
+        }
+
         default: {
             break;
         }
